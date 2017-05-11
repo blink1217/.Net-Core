@@ -4,17 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Winterwood.Models;
-using Winterwood.DAL; 
+using Winterwood.DAL;
+
+using Microsoft.Extensions.Logging;
 
 namespace Winterwood.Controllers
 {
     public class HomeController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork(); 
+        private UnitOfWork unitOfWork = new UnitOfWork();
+
+        private readonly ILogger _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
         public IActionResult Index()
         {
+            _logger.LogDebug("User Accessed Site"); 
+
             var invoice = unitOfWork.InvoiceRepository.Get(includeProperties: "Account"); 
+
+
             return View(invoice.ToList());
         }
         [HttpPost]

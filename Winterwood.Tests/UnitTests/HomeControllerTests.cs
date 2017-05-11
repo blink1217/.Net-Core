@@ -9,19 +9,20 @@ using Winterwood.DAL;
 using Winterwood.Models;
 using Moq;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 
 namespace Winterwood.Tests.UnitTests
 {
     [TestClass]
     public class HomeControllerTests
     {
+        private readonly ILogger _logger;
         [TestMethod]
         public void Index_ReturnsAViewResult()
         {
             // Arrange
 
-            var controller = new HomeController();
+            var controller = new HomeController(_logger);
 
             ViewResult result = controller.Index() as ViewResult;
 

@@ -15,16 +15,10 @@ namespace Winterwood.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         private readonly ILogger _logger;
-        private ILogger _logger1;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-        }
-
-        public HomeController(ILogger logger1)
-        {
-            _logger1 = logger1;
         }
 
         public IActionResult Index()
